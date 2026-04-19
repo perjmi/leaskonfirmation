@@ -33,23 +33,39 @@
       text-align: center;
     }
     h1 {
-      margin: 0 0 1rem;
+      margin: 0 0 0.25rem;
       font-size: clamp(1.75rem, 5vw, 2.5rem);
       color: var(--accent);
+    }
+    .spider {
+      font-size: 3rem;
+      margin: 0.5rem 0 1rem;
+      animation: sway 4s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes sway {
+      0%, 100% { transform: translateY(0) rotate(-6deg); }
+      50%      { transform: translateY(-8px) rotate(6deg); }
     }
     pre.lyrics {
       font-family: inherit;
       font-size: 1.15rem;
       line-height: 1.7;
       white-space: pre-wrap;
-      margin: 0;
+      margin: 1rem 0 0;
       color: var(--ink);
+    }
+    footer {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--soft);
     }
   </style>
 </head>
 <body>
   <main>
     <h1>Lille Peter Edderkop</h1>
+    <div class="spider" aria-hidden="true">🕷️</div>
     <pre class="lyrics">Lille Peter Edderkop
 kravlede op ad muren.
 Så kom regnen
@@ -58,6 +74,7 @@ Så kom solen
 og tørrede Peters krop.
 Lille Peter Edderkop
 kravlede atter op.</pre>
+    <footer>Til Lea ❤️</footer>
   </main>
 </body>
 </html>
