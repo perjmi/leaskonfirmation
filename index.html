@@ -18,14 +18,96 @@
       background: var(--bg);
       color: var(--ink);
       min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
       padding: 2rem 1rem;
+      overflow-x: hidden;
+      position: relative;
     }
-    main {
-      max-width: 44rem;
+
+    /* Ladybugs roaming around the page */
+    .ladybug {
+      position: fixed;
+      font-size: 1.75rem;
+      pointer-events: none;
+      z-index: 5;
+      will-change: transform;
+    }
+    .ladybug span {
+      display: inline-block;
+      animation: bug-wiggle 0.5s ease-in-out infinite;
+    }
+    @keyframes bug-wiggle {
+      0%, 100% { transform: rotate(-10deg); }
+      50%      { transform: rotate(10deg);  }
+    }
+    .lb1 { top: 8%;  left: -3rem; animation: roam1 22s linear infinite; }
+    .lb2 { top: 70%; left: -3rem; animation: roam2 28s linear infinite; animation-delay: -6s; }
+    .lb3 { top: 35%; right: -3rem; animation: roam3 25s linear infinite; animation-delay: -10s; }
+    .lb4 { top: 55%; right: -3rem; animation: roam4 30s linear infinite; animation-delay: -3s; }
+    .lb5 { top: 20%; left: -3rem; animation: roam5 35s linear infinite; animation-delay: -18s; font-size: 1.25rem; }
+    .lb6 { top: 85%; right: -3rem; animation: roam6 26s linear infinite; animation-delay: -14s; font-size: 2.25rem; }
+
+    @keyframes roam1 {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      25%  { transform: translate(40vw, 12vh) rotate(15deg); }
+      50%  { transform: translate(85vw, -4vh) rotate(-5deg); }
+      75%  { transform: translate(60vw, 25vh) rotate(20deg); }
+      100% { transform: translate(110vw, 5vh) rotate(0deg); }
+    }
+    @keyframes roam2 {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      30%  { transform: translate(35vw, -15vh) rotate(-15deg); }
+      60%  { transform: translate(70vw, 8vh) rotate(10deg); }
+      100% { transform: translate(110vw, -10vh) rotate(0deg); }
+    }
+    @keyframes roam3 {
+      0%   { transform: translate(0, 0) rotate(180deg); }
+      30%  { transform: translate(-30vw, 20vh) rotate(160deg); }
+      60%  { transform: translate(-60vw, -10vh) rotate(200deg); }
+      100% { transform: translate(-110vw, 5vh) rotate(180deg); }
+    }
+    @keyframes roam4 {
+      0%   { transform: translate(0, 0) rotate(180deg); }
+      40%  { transform: translate(-50vw, -25vh) rotate(165deg); }
+      80%  { transform: translate(-90vw, 10vh) rotate(195deg); }
+      100% { transform: translate(-110vw, 0) rotate(180deg); }
+    }
+    @keyframes roam5 {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      50%  { transform: translate(55vw, 35vh) rotate(25deg); }
+      100% { transform: translate(110vw, 0) rotate(0deg); }
+    }
+    @keyframes roam6 {
+      0%   { transform: translate(0, 0) rotate(180deg); }
+      50%  { transform: translate(-55vw, -20vh) rotate(170deg); }
+      100% { transform: translate(-110vw, 0) rotate(180deg); }
+    }
+
+    /* Page layout */
+    .page {
+      max-width: 64rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr minmax(0, 32rem) 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 4rem;
+    }
+    .side img {
       width: 100%;
+      border-radius: 0.75rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 24, 88, 0.18);
+      transform: rotate(-2deg);
+    }
+    .side.right img { transform: rotate(2deg); }
+
+    main {
       background: #fff;
       border-radius: 1.25rem;
       padding: 2rem 2rem 2.5rem;
@@ -38,61 +120,10 @@
       color: var(--accent);
     }
     .melody {
-      margin: 0;
+      margin: 0 0 1.5rem;
       font-style: italic;
-      color: var(--ink);
       opacity: 0.7;
       font-size: 0.95rem;
-    }
-    .climb {
-      position: relative;
-      width: 4rem;
-      height: 10rem;
-      margin: 1rem auto 1.5rem;
-    }
-    .thread {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--ink);
-      opacity: 0.25;
-      transform: translateX(-50%);
-    }
-    .spider {
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      font-size: 2.5rem;
-      transform: translate(-50%, 0);
-      transform-origin: 50% 0;
-      animation: climb 6s ease-in-out infinite, wiggle 0.6s ease-in-out infinite;
-    }
-    @keyframes climb {
-      0%   { bottom: 0;     }
-      45%  { bottom: 85%;   }
-      55%  { bottom: 85%;   }
-      70%  { bottom: 0;     }
-      100% { bottom: 0;     }
-    }
-    @keyframes wiggle {
-      0%, 100% { transform: translate(-50%, 0) rotate(-8deg); }
-      50%      { transform: translate(-50%, 0) rotate(8deg);  }
-    }
-    .photos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-      gap: 1rem;
-      margin: 0 0 1.5rem;
-    }
-    .photos img {
-      width: 100%;
-      height: 100%;
-      max-height: 22rem;
-      object-fit: cover;
-      border-radius: 0.75rem;
-      box-shadow: 0 0.5rem 1rem rgba(0, 24, 88, 0.15);
     }
     ol.verses {
       list-style: none;
@@ -122,58 +153,79 @@
     footer {
       margin-top: 2rem;
       font-size: 0.9rem;
-      color: var(--ink);
       opacity: 0.7;
+    }
+
+    /* Mobile: stack photos above/below the text */
+    @media (max-width: 720px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+      .side {
+        flex-direction: row;
+        padding-top: 0;
+      }
+      .side img {
+        max-height: 12rem;
+        object-fit: cover;
+      }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Leas konfirmation 2. maj 2026</h1>
-    <p class="melody">Melodi: Mariehønen Evigglad</p>
+  <div class="ladybug lb1" aria-hidden="true"><span>🐞</span></div>
+  <div class="ladybug lb2" aria-hidden="true"><span>🐞</span></div>
+  <div class="ladybug lb3" aria-hidden="true"><span>🐞</span></div>
+  <div class="ladybug lb4" aria-hidden="true"><span>🐞</span></div>
+  <div class="ladybug lb5" aria-hidden="true"><span>🐞</span></div>
+  <div class="ladybug lb6" aria-hidden="true"><span>🐞</span></div>
 
-    <div class="climb" aria-hidden="true">
-      <div class="thread"></div>
-      <div class="spider">🕷️</div>
-    </div>
-
-    <div class="photos">
+  <div class="page">
+    <aside class="side left">
       <img src="photo-ship.jpg" alt="Lea foran et stort sejlskib" />
-      <img src="photo-family.jpg" alt="Lea med søskende i sofaen" />
-    </div>
+    </aside>
 
-    <ol class="verses">
-      <li>Vi samlet er på denne dag.
+    <main>
+      <h1>Leas konfirmation 2. maj 2026</h1>
+      <p class="melody">Melodi: Mariehønen Evigglad</p>
+
+      <ol class="verses">
+        <li>Vi samlet er på denne dag.
 Du fejres skal, i festligt lag,
 for du er blevet konfirmand
 og sidder der så elegant.</li>
-      <li>Du bor i hus med mor og far
+        <li>Du bor i hus med mor og far
 og søskende og kat du har.
 I kirkeklub med Mattis går.
 I gode stunder sammen får.</li>
-      <li>Du hører til i Midtjylland.
+        <li>Du hører til i Midtjylland.
 Vi ses så ofte vi nu kan.
 Fra ”Jensenture” minder har.
 En årlig tur - SÅ godt det var.</li>
-      <li>Du’ ofte glad og positiv.
+        <li>Du’ ofte glad og positiv.
 Og har et aktivt ”pigeliv”.
 Du elsker spejder og ballet.
 Med bøger er du <em>passionate</em>.</li>
-      <li>Du’ kærlig, sød, det rene guld.
+        <li>Du’ kærlig, sød, det rene guld.
 Mod dyr og men’sker omsorgsfuld.
 Besøger farmor fast en dag.
 I laver mad – Det’ ingen sag.</li>
-      <li>En dag som denne mangler to.
+        <li>En dag som denne mangler to.
 At savnet er der ved vi jo.
 Fra himlen kigger stolte ned.
 De følger nemlig kærligt med.</li>
-      <li>Vi sangen her nu slutte vil.
+        <li>Vi sangen her nu slutte vil.
 Et stort tillykke skal der til.
 Vi ønsker du alt godt vil få.
 Nu alle for dig skåle må.</li>
-    </ol>
+      </ol>
 
-    <footer>Charlotte &amp; Per, Amalie &amp; Amir, Sophia &amp; Christian</footer>
-  </main>
+      <footer>Charlotte &amp; Per, Amalie &amp; Amir, Sophia &amp; Christian</footer>
+    </main>
+
+    <aside class="side right">
+      <img src="photo-family.jpg" alt="Lea med søskende i sofaen" />
+    </aside>
+  </div>
 </body>
 </html>
